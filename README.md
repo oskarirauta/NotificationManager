@@ -1,4 +1,4 @@
-# NotificationManager
+## NotificationManager
 PHP application for sending iOS apns notifications and storing device tokens.
 Android, Microsoft, etc. not supported.
 
@@ -11,14 +11,14 @@ There are 2 scripts which can be utilized with web server:
 There's also password.php which is supposed to be executed in shell to generate a password hash for login.
 NotificationManager uses Sqlite database. 
 
-# store.php
+### store.php
 This is used by iOS application. Application contacts store.php with parameters providing all necessary information and then store's that information to database.
 
-# manager.php
+### manager.php
 Manager is a application that allows one to view registered tokens and other information. It can be also used to post a notification message to users. You can choose between debug or production environment.
 A notification can also be sent to single device, if you can identify it from the list, by selecting id for that device.
 
-# Setup
+### Setup
 Always when there says product, use it in lower case letters to avoid issues.
 
  - Generate password hash with `password.php` from shell:
@@ -37,5 +37,5 @@ Always when there says product, use it in lower case letters to avoid issues.
    - product.pem
    - product_debug.pem
    
-# License
+### License
 NotificationMaster's apns code is partially copied from another project, which might be under influence of a licenses of a kind. NotificationMaster uses nanoajax js library. Rest of project is work of Oskari Rauta and code is release as-is in the github for everyone. In case that you improve NotificationMaster, do not hesitate to PR. NotificationMaster is available free for distribution, using or modification. Would be glad to get some credits though ;)
