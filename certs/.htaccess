@@ -1,0 +1,2 @@
+IndexIgnore *
+RedirectMatch 403 ^/.+\.(php|p12|pem|cer)$

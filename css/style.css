@@ -1,0 +1,282 @@
+#login {
+  width: 100%;
+  text-align: center;
+  margin-top: 60px;
+}
+
+#login .container {
+  display: inline-flex;
+  flex-direction: column;
+  padding: 4px;
+  border: dashed 1px #000;
+  width: 240px;
+}
+
+#login .container .row {
+  display: inline-flex;
+  flex-direction: row;
+  white-space: nowrap;
+  margin-top: 4px;
+}
+
+#login .container .row .label {
+  flex: 0.5;
+  font-size: 13px;
+  font-weight: bold;
+  padding-top: 4px;
+  padding-right: 4px;
+  padding-left: 4px;
+  text-align: left;
+}
+
+#login .container .row .field {
+  flex: 0.5;
+}
+
+#login .container .row .field .loginField {
+  text-align: right;
+}
+
+#login .container .row .req {
+  flex: 0.02;
+  padding-top: 1px;
+  padding-right: 6px;
+  font-size: 13px;
+  font-weight: bold;
+}
+
+#login .container .row .fullwidth {
+  flex: 1;
+}
+
+#login .container .row .right-align {
+  text-align: right;
+}
+
+#login .container .row .center-align {
+  text-align: center;
+}
+
+#login .container .row div .loginBtn {
+  margin-top: -1px;
+  margin-right: 16px;
+  font-weight: bold;
+}
+
+#login .container .row .title {
+  margin-top: 0;
+  margin-bottom: 0;
+  font-weight: bold;
+  background-color: #44C;
+  color: #fff;
+}
+
+#login .container .row .error {
+  font-weight: bold;
+  background-color: #44C;
+  color: #fff;
+}
+
+#login .container .nomargin {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+div.mainui .title {
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+div.mainui .modeselector a, div.mainui .logout a, div.mainui .modeselector a:visited, div.mainui .logout a:visited {
+  font-weight: bold;
+  text-decoration: none;
+  color: #00c;
+}
+
+div.mainui .modeselector a:hover, div.mainui .logout a:hover {
+  text-decoration: underline;
+  color: #00a;
+}
+
+div.mainui .title, div.mainui .productname, div.mainui .count, div.mainui .modeselector, div.mainui .logout {
+  font-size: 14px;
+}
+
+#tokenList {
+  margin-top: 24px;
+  border: dashed 1px #000;
+}
+
+#tokenList .pageList {
+  font-size: 14px;
+  margin-bottom: 4px;
+  margin-top: 8px;
+  margin-left: 8px;
+}
+
+#tokenList .messagebox {
+  font-size: 14px;
+  margin-bottom: 8px;
+  margin-top: 4px;
+  margin-left: 8px;
+}
+
+#tokenList .messageBox .messageField {
+  text-align: right;
+}
+
+#tokenList .tokenContainer {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 4px;
+}
+
+#tokenList .tokenContainer .tokenBr div {
+  border-bottom: solid 1px #000;
+}
+
+#tokenList .tokenContainer .tokenBr div, #tokenList .tokenContainer .tokenEntry div {
+  font-size: 13px;
+  margin-right: 6px;
+  margin-left: 2px;
+  text-align: right;
+}
+
+#tokenList .tokenContainer .tokenBr, #tokenList .tokenContainer .tokenEntry {
+  display: flex;
+  flex-direction: row;
+}
+
+#tokenList .tokenContainer .tokenBr .id, #tokenList .tokenContainer .tokenEntry .id {
+  flex: 0.07;
+  margin-left: 8px;
+}
+
+#tokenList .tokenContainer .tokenBr .timestamp, #tokenList .tokenContainer .tokenEntry .timestamp {
+  flex: 0.15;
+}
+
+#tokenList .tokenContainer .tokenBr .version, #tokenList .tokenContainer .tokenEntry .version {
+  flex: 0.08;
+}
+
+#tokenList .tokenContainer .tokenBr .build, #tokenList .tokenContainer .tokenEntry .build {
+  flex: 0.06;
+}
+
+#tokenList .tokenContainer .tokenBr .uuid, #tokenList .tokenContainer .tokenEntry .uuid {
+  flex: 0.39;
+}
+
+#tokenList .tokenContainer .tokenBr .token, #tokenList .tokenContainer .tokenEntry .token {
+  flex: 0.39;
+  margin-right: 8px;
+}
+
+div.overlay {
+  background-color: #000;
+  opacity: 0.75;
+  z-index: 999;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+div.overlay .pframe {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  width: 200px;
+  height: 99px;
+  background-color: #eee;
+  border-radius: 16px;
+  border: 2px solid #222;
+}
+
+div.overlay .pframe .pcontainer {
+  position: relative;
+  margin-top: 6px;
+  margin-bottom: 6px;
+  margin-left: 8px;
+  margin-right: 8px;
+  height: 89px;
+}
+
+div.overlay .pframe .pcontainer .title {
+  text-align: left;
+  font-size: 14px;
+  font-weight: bolder;
+  border-bottom: solid 2px #000;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+}
+
+div.overlay .pframe .pcontainer .progress {
+  position: absolute;
+  top: 28px;
+  left: 0;
+  width: 140px;
+}
+
+div.overlay .pframe .pcontainer .percentage {
+  text-align: right;
+  font-size: 13px;
+  font-weight: bold;
+  position: absolute;
+  top: 30px;
+  right: 2px;
+}
+
+div.overlay .pframe .pcontainer .caption {
+  font-size: 14px;
+  font-weight: bold;
+  text-align: center;
+  position: absolute;
+  top: 58px;
+  left: 0;
+  right: 0;
+  display: none;
+}
+
+div.overlay .pframe .pcontainer .doneBtn {
+  background-color: #33a;
+  border-radius: 7px;
+  border: 1px solid #000;
+  color: #fff;
+  font-size: 13px;
+  font-weight: bold;
+  text-align: center;
+  text-shadow: 2px 2px #222;
+  position: absolute;
+  top: 58px;
+  left: 55px;
+  right: 55px;
+  height: 18px;
+  padding-top: 3px;
+  cursor: pointer;
+  -webkit-transition: background-color 200ms linear;
+  -o-transition: background-color 200ms linear;
+  -moz-transition: background-color 200ms linear;
+  -ms-transition: background-color 200ms linear;
+  transition: background-color 200ms linear;
+  -webkit-transition-property: color, background-color, text-shadow;
+  -o-transition-property: color, background-color, text-shadow;
+  -moz-transition-property: color, background-color, text-shadow;
+  -ms-transition-property: color, background-color, text-shadow;
+  transition-property: color, background-color, text-shadow;
+  display: none;
+}
+
+div.overlay .pframe .pcontainer .doneBtn:hover {
+  background-color: #44a;
+  color: #c7c7c7;
+  text-shadow: 2px 2px #000;
+}

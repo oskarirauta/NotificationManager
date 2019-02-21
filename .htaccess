@@ -1,0 +1,3 @@
+IndexIgnore *
+RedirectMatch 403 ^/.+\.(db)$
+RedirectMatch 403 password.php
