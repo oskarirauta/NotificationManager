@@ -11,6 +11,9 @@ There are 2 scripts which can be utilized with web server:
 There's also password.php which is supposed to be executed in shell to generate a password hash for login.
 NotificationManager uses Sqlite database. 
 
+## Requirements
+PHP 7.x or newer.
+
 ### store.php
 This is used by iOS application. Application contacts store.php with parameters providing all necessary information and then store's that information to database.
 
