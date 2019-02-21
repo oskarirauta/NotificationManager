@@ -36,7 +36,7 @@ $session['debugOnly'] = !empty(getParam('debugOnly') or '') ? true : false;
 $session['uuid'] = getParam('uuid') or '';
 $session['deviceToken'] = getParam('deviceToken') or '';
 $session['version'] = getParam('version') or '';
-$session['build'] = intval(getParam('build') or '0');
+$session['build'] = getParam('build') or '0';
 $session['invalid'] = 0;
 
 /*
