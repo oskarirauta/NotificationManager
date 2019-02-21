@@ -30,7 +30,7 @@ function generate_page() {
 
   $page['body'] .= "<div class='row'>\r\n";
   $page['body'] .= "<div class='label'>User ID:</div>\r\n";
-  $page['body'] .= "<div class='field'>" . inputType('text', 'userid', '', [ 'placeholder' => 'user id', 'class' => 'loginField', required => true ]) . "</div>\r\n";
+  $page['body'] .= "<div class='field'>" . inputType('text', 'userid', '', [ 'placeholder' => 'user id', 'class' => 'loginField', 'required' => true ]) . "</div>\r\n";
   $page['body'] .= "<div class='req'>&nbsp;*</div>\r\n";
   $page['body'] .= "</div>\r\n";
 
