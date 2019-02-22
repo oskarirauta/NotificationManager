@@ -19,7 +19,7 @@ if ( empty($session['targetId']) || empty($session['deviceToken']) || empty($ses
 }
 
 $certFile = $ROOT_DIR . '/certs/' . $session['product'] . ( $session['debugOnly'] ? '_debug' : '' ) . '.pem';
-$certPassword = cert_password[$session['product']];
+$certPassword = $cert_password[$session['product']];
 $server = 'ssl://gateway.' . ( $session['debugOnly'] ? 'sandbox.' : '' ) . 'push.apple.com:2195';
 
 // Setup notification message
