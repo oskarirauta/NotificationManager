@@ -23,11 +23,17 @@ $certPassword = cert_password[$session['product']];
 $server = 'ssl://gateway.' . ( $session['debugOnly'] ? 'sandbox.' : '' ) . 'push.apple.com:2195';
 
 // Setup notification message
-$body = array();
-$body['aps'] = array('alert' => $message);
-if ( !empty($session['notifyurl'])) $body['aps']['notifurl'] = $notifyurl;
-$body['aps']['badge'] = $session['badge'];
-$body['aps']['sound'] = $session['sound'];
+$body['aps'] = array(
+  'alert' => array(
+    'title' => '',
+    'body' => $session['payload']),
+  'sound' => 'default'
+);
+
+if ( !empty($session['payloadtitle'])) $body['aps']['alert']['title'] = $session['payloadtitle'];
+if ( !empty($session['notifyurl'])) $body['aps']['notifyurl'] = $session['notifyurl'];
+if ( !empty($session['badge'])) $body['aps']['badge'] = $session['badge'];
+if ( !empty($session['sound'])) $body['aps']['sound'] = $session['sound'];
 
 // Setup stream (connect to Apple Push Server)
 $ctx = stream_context_create();

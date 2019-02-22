@@ -7,7 +7,7 @@ require_once $ROOT_DIR . '/inc/generic.php';
 $first_run = true;
 
 $session = [
-  'ssl' => is_ssl(),
+  'ssl' => true, /*is_ssl(),*/
   'uuid' => '',
   'validated' => false,
   'error' => '',
@@ -16,8 +16,9 @@ $session = [
   'pageIndex' => 0,
   'debugOnly' => false,
   'targetId' => '',
-  'payload' => '',
   'deviceToken' => '',
+  'payloadtitle' => '',
+  'payload' => '',
   'badge' => '',
   'sound' => '',
   'notifyurl' => '',
