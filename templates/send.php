@@ -21,7 +21,7 @@ function generate_script($tokens) {
   $lastId = end($tokens)['id'];
 
   foreach ( $tokens as $token ) {
-    $script .= " [" . $token['id'] . ", " . $token['token'] . "]";
+    $script .= " [" . $token['id'] . ", '" . $token['token'] . "']";
     $script .= $token['id'] == $lastId ? "];\r\n\n" : ",\r\n";
   }
 
