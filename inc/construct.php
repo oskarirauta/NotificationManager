@@ -62,7 +62,7 @@ $session['sound'] = getParam('sound') or '';
 $session['notifyurl'] = getParam('notifyurl') or '';
 
 if ( empty($session['uuid']) && empty($session['error'])) {
-  $userid = getParam('userid') or '';
+  $userid = getParam('userid') == null ? '' : strtolower(getParam('product'));
   $password = getParam('passwd') or '';
   $product = getParam('product') == null ? '' : strtolower(getParam('product'));
 
