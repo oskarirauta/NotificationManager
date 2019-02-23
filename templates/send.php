@@ -116,7 +116,7 @@ function generate_page() {
   $idCount = $db -> amountOf($session['product'], $session['debugOnly'] ? 1 : 0);
   $page['title'] = 'Notification system - Sending';
 
-  generate_script($tokens);
+  generate_script(is_array($tokens) ? $tokens : [$tokens]);
 
   $page['body'] .= "<div class='sendui'>\r\n";
   $page['body'] .= "<div class='title'>Sending message.</div>\r\n";
