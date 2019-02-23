@@ -15,8 +15,7 @@ function tokenList() {
 
     $ret .= "<div class='pagelist'>";
     $ret .= "<a href='./" . $SCRIPT_FILE . "?page=main&uuid=" . $session['uuid'] . "&debugOnly=" . ( $session['debugOnly'] ? "1" : "0" ) . "'>Exit single token mode</a>";
-    $ret .= "&nbsp;";
-    $ret .= "<a href='./" . $SCRIPT_FILE . "?page=main&uuid=" . $session['uuid'] . "&debugOnly=" . ( $session['debugOnly'] ? "1" : "0" ) . "&deleteToken=1'>Remove this token</a>";
+    $ret .= "<a style='margin-left: 16px;' href='./" . $SCRIPT_FILE . "?page=main&uuid=" . $session['uuid'] . "&debugOnly=" . ( $session['debugOnly'] ? "1" : "0" ) . "&deleteToken=1&targetId=" . $session['targetId'] . "'>Remove this token</a>";
     $ret .= "</div>";
 
   } else {

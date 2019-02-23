@@ -17,6 +17,7 @@ if ( $session['page'] == 'main' ) {
   $session['deleteToken'] = getParam('deleteToken') == '1' ? true : false;
   if ( $session['deleteToken'] && !empty($session['targetId'])) {
     $db -> deleteToken($session['targetId']);
+    $session['targetId'] = '';
   }
 }
 
