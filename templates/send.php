@@ -18,14 +18,13 @@ function generate_script($tokens) {
   $script .= "var msg = '" . $session['payload'] . "';\r\n";
   $script .= "var tokenList = [\r\n";
 
-  $lastId = end($tokens)['id'];
-
-  foreach ( $tokens as $token ) {
+  while ( count($tokens) != 0 ) {
+    $token = array_shift($tokens);
     $script .= " [" . $token['id'] . ", '" . $token['token'] . "']";
-    $script .= $token['id'] == $lastId ? "];\r\n\n" : ",\r\n";
+    $script .= count($tokens) == 0 ? "];\r\n\n" : ",\r\n";
   }
 
-  $script .= <<<EOF
+$script .= <<<EOF
 
 var progressEl = document.getElementById('progress');
 var percentageEl = document.getElementById('percentage');
