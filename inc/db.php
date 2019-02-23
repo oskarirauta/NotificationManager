@@ -169,7 +169,7 @@ EOF;
   }
 
   function markInvalid($id) {
-    $this -> exec("UPDATE entries SET invalid = 1 WHERE uuid = '" . $id . "';");
+    $this -> exec("UPDATE entries SET invalid = 1 WHERE id = '" . $id . "';");
   }
 
 }

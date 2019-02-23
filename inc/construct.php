@@ -73,13 +73,13 @@ if ( empty($session['uuid']) && empty($session['error'])) {
   $product = 'myproduct';
 */
 
-  if ( $userid == $credentials['userid'] && password_verify( $password, $credentials['password']) && !empty($product) && in_array($product, $products)) {
+  if ( $userid == $credentials['userid'] && password_verify( $password, $credentials['password']) && !empty($product) && in_array($product, array_keys($products))) {
     $session['uuid'] = $db -> create_session($product);
     $session['product'] = $product;
     $session['validated'] = true;
   } else if ( $userid != $credentials['userid'] ) {
     $session['error'] = 'Invalid user id.';
-  } else if ( empty($product) || !in_array($product, $products)) {
+  } else if ( empty($product) || !in_array($product, array_keys($products))) {
     $session['error'] = 'Invalid product code.';
   } else if ( !password_verify( $password, $credentials['password'] )) {
     $session['error'] = 'Invalid password.';

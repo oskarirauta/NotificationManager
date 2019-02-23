@@ -37,6 +37,7 @@ $session['uuid'] = getParam('uuid') or '';
 $session['deviceToken'] = getParam('deviceToken') or '';
 $session['version'] = getParam('version') or '';
 $session['build'] = getParam('build') or '0';
+$session['password'] = getParam('password') or '';
 $session['invalid'] = 0;
 
 /*
@@ -47,13 +48,17 @@ $session['uuid'] = 2074;
 $session['deviceToken'] = 9802;
 $session['version'] = '1.2';
 $session['build'] = 102;
+$session['password'] = '';
 */
 
-if ( empty($session['product']) || empty($session['uuid']) || empty($session['deviceToken']) || empty($session['version']) || $session['build'] < 1 ) {
+if ( empty($session['product']) || empty($session['uuid']) || empty($session['deviceToken']) || empty($session['version']) || empty($session['password']) || $session['build'] < 1 ) {
   print('ERROR: parameter mismatch');
   return;
 } elseif ( !in_array($session['product'], $products)) {
   print('ERROR: invalid product code');
+  return;
+} else if ( !password_verify( $password, $products[$session['product']]['store'])) {
+  print('ERROR: authentication error');
   return;
 }
 

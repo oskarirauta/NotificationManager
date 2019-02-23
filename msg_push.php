@@ -19,7 +19,7 @@ if ( empty($session['targetId']) || empty($session['deviceToken']) || empty($ses
 }
 
 $certFile = $ROOT_DIR . '/certs/' . $session['product'] . ( $session['debugOnly'] ? '_debug' : '' ) . '.pem';
-$certPassword = $cert_password[$session['product']];
+$certPassword = $products[$session['product']]['cert'];
 $server = 'ssl://gateway.' . ( $session['debugOnly'] ? 'sandbox.' : '' ) . 'push.apple.com:2195';
 
 // Setup notification message
@@ -57,23 +57,18 @@ else {
   fwrite($fp, $msg);
 
   // We can check if an error has been returned while we are sending, but we also need to check once more after we are done sending in case there was a delay with error response.
-  $error1 = checkAppleErrorResponse($fp, $row_id);
+  $error1 = checkAppleErrorResponse($fp, $session['targetId');
 
   // Workaround to check if there were any errors during the last seconds of sending.
   usleep(500000); //Pause for half a second. Note I tested this with up to a 5 minute pause, and the error message was still available to be retrieved
-  $error2 = checkAppleErrorResponse($fp, $row_id);
+  $error2 = checkAppleErrorResponse($fp, $session['targetId');
 
   if ( empty($error1) && empty($error2))
-    print("OK\r\n");
-  else {
-    $error_msg = empty($error1) ? $error2 : $error1;
-    print($error_msg . "\r\n");
-    if (0 === strpos($error_msg, 'Error code 8:')) {
-      $db -> markInvalid($session['targetId']);
-    }
-  }
+    print("OK");
+  else
+    print(empty($error1) ? $error2 : $error1);
 
-  print("<br/>\r\n");
+  print("\r\n<br/>\r\n");
   fclose($fp);
 }
 
@@ -81,6 +76,7 @@ else {
 // Returns empty string if no error. Otherwise string contains error message.
 function checkAppleErrorResponse($fp, $row_id) {
 
+  global $db;
   $retval = '';
 
   // byte1=always 8, byte2=StatusCode, bytes3,4,5,6=identifier(rowID). Should return nothing if OK.
@@ -118,6 +114,7 @@ function checkAppleErrorResponse($fp, $row_id) {
         $retval .= '7: Invalid payload size';
         break;
       case 8:
+        $db -> markInvalid($row_id);
         $retval .= '8: Invalid token';
         break;
       case 255:

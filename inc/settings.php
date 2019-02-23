@@ -1,16 +1,15 @@
 <?php
 
-$products = [ // list of appname's using this in lowercase
-  'myproduct'
+$products = [
+  'myproduct' => [ // Use password.php to generate store password. cert password is in cleartext.
+    'store' => '$2y$10$1pACPfObCg9/Q02/avejv.RHCt/MLgtb03s7Zwfla6/.a4cSMV5gG',
+    'cert' => 'password' // Default store password is 'password'
+  ]
 ];
 
-$credentials = [
+$credentials = [ // Use password.php to generate password hash. Default: admin
   'userid' => 'myuser', // Add your userid here.
-  'password' => '' // Add your password hash here. Use password.php in console to generate proper hash. Cleartext password's are not supported here.
-];
-
-$cert_password = [ // certificate passwords.
-  'myproduct' => 'password'
+  'password' => '$2y$10$R3LOrI94FG6xzNEqq5t1eOEyf9MjAIqQFImG.0YviWpVrFRRoi7cK'
 ];
 
 ?>
