@@ -172,6 +172,10 @@ EOF;
     $this -> exec("UPDATE entries SET invalid = 1 WHERE id = '" . $id . "';");
   }
 
+  function deleteToken($id) {
+    $this -> exec("DELETE FROM entries WHERE id = '" . $id . "';");
+  }
+
 }
 
 function closeDB() {

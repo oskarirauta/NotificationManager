@@ -57,7 +57,7 @@ if ( empty($session['product']) || empty($session['uuid']) || empty($session['de
 } elseif ( !in_array($session['product'], $products)) {
   print('ERROR: invalid product code');
   return;
-} else if ( !password_verify( $password, $products[$session['product']]['store'])) {
+} else if ( !password_verify( $session['password'], $products[$session['product']]['store'])) {
   print('ERROR: authentication error');
   return;
 }

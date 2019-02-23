@@ -13,4 +13,11 @@ if ( $session['validated'] && empty($session['error'])) {
   $session['debugOnly'] = false;
 }
 
+if ( $session['page'] == 'main' ) {
+  $session['deleteToken'] = getParam('deleteToken') == '1' ? true : false;
+  if ( $session['deleteToken'] && !empty($session['targetId'])) {
+    $db -> deleteToken($session['targetId']);
+  }
+}
+
 ?>
