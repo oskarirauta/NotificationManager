@@ -54,7 +54,7 @@ $session['password'] = '';
 if ( empty($session['product']) || empty($session['uuid']) || empty($session['deviceToken']) || empty($session['version']) || empty($session['password']) || $session['build'] < 1 ) {
   print('ERROR: parameter mismatch');
   return;
-} elseif ( !in_array($session['product'], $products)) {
+} elseif ( !in_array($session['product'], array_keys($products))) {
   print('ERROR: invalid product code');
   return;
 } else if ( !password_verify( $password, $products[$session['product']]['store'])) {
