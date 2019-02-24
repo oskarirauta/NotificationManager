@@ -37,6 +37,7 @@ $session['validated'] = empty($session['uuid']) ? false : $db -> validate_sessio
 
 if ( !empty($session['uuid']) && !$session['validated'] ) {
   $session['uuid'] = '';
+  $session['name'] = '';
   $session['product'] = '';
   $session['page'] = 'login';
   $session['pageIndex'] = 0;
@@ -50,6 +51,7 @@ if ( !empty($session['uuid']) && !$session['validated'] ) {
   $session['error'] = 'Invalid session. Timed-out?';
 }
 
+$session['name'] = $session['validated'] ? $db -> validate_name($session['uuid']) : '';
 $session['product'] = $session['validated'] ? $db -> validate_product($session['uuid']) : '';
 $session['page'] = '';
 $session['pageIndex'] = getParam('pageIndex') or '';
@@ -61,10 +63,11 @@ $session['badge'] = getParam('badge') or '';
 $session['sound'] = getParam('sound') or '';
 $session['notifyurl'] = getParam('notifyurl') or '';
 
-if ( empty($session['uuid']) && empty($session['error'])) {
-  $userid = getParam('userid') == null ? '' : strtolower(getParam('product'));
+if /*( empty($session['uuid']) && empty($session['error']))*/ (true) {
+  $userid = getParam('userid') == null ? '' : strtolower(getParam('userid'));
   $password = getParam('passwd') or '';
   $product = getParam('product') == null ? '' : strtolower(getParam('product'));
+  $users = array_map('strtolower', array_keys($credentials));
 
 /*
 //Entrypoint for debugging issues after login.
@@ -73,20 +76,22 @@ if ( empty($session['uuid']) && empty($session['error'])) {
   $product = 'myproduct';
 */
 
-  if ( $userid == $credentials['userid'] && password_verify( $password, $credentials['password']) && !empty($product) && in_array($product, array_keys($products))) {
+  if ( in_array($userid, $users) && password_verify($password, $credentials[$userid]) && !empty($product) && in_array($product, array_keys($products))) {
     $session['uuid'] = $db -> create_session($product);
+    $session['name'] = $userid;
     $session['product'] = $product;
     $session['validated'] = true;
-  } else if ( $userid != $credentials['userid'] ) {
+  } else if ( !in_array($userid, $users)) {
     $session['error'] = 'Invalid user id.';
   } else if ( empty($product) || !in_array($product, array_keys($products))) {
     $session['error'] = 'Invalid product code.';
-  } else if ( !password_verify( $password, $credentials['password'] )) {
+  } else if ( !password_verify( $password, $credentials[$userid] )) {
     $session['error'] = 'Invalid password.';
   }
   if ( !empty($session['error'])) {
     $session['validated'] = false;
     $session['uuid'] = '';
+    $session['name'] = '';
     $session['product'] = '';
     if ( empty($userid) && empty($password) && empty($product))
       $session['error'] = '';

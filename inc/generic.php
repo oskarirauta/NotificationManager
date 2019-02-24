@@ -38,12 +38,14 @@ function pageData() {
 
 function inputType($type, $name, $value = '', $attributes = []) {
   $required = false;
+  $disabled = false;
   $ret = "<INPUT TYPE='" . $type . "' name='" . $name . "' value='" . $value . "'";
   foreach ( $attributes as $key => $val ) {
     if ( $key == 'required' ) $required = true;
+    elseif ( $key == 'disabled' ) $disabled = true;
     else $ret .= " " . $key . "='" . $val . "'";
   }
-  return $ret . ( $required ? ' required' : '' ) . " />";
+  return $ret . ( $required ? ' required' : '' ) . ( $disabled ? ' disabled' : '' ) . " />";
 }
 
 function submitButton($name = '', $value = '', $attributes = []) {
