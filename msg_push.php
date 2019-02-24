@@ -41,9 +41,9 @@ stream_context_set_option($ctx, 'ssl', 'passphrase', $certPassword);
 stream_context_set_option($ctx, 'ssl', 'local_cert', $certFile);
 $fp = stream_socket_client($server, $err, $errstr, 60, STREAM_CLIENT_CONNECT, $ctx);
 
-if ( !$fp ) // ERROR
+if ( !$fp ) { // ERROR
   print("Error code -2: Failed to connect (stream_socket_client)\r\n");
-else {
+} else {
   stream_set_blocking ($fp, 0); //This allows fread() to return right away when there are no errors. But it can also miss errors during last seconds of sending, as there is a delay before error is returned. Workaround is to pause briefly AFTER sending last notification, and then do one more fread() to see if anything else is there.
   $apple_expiry = time() + (8 * 24 * 60 * 60); //Keep push alive (waiting for delivery) for 8 days
 
@@ -57,11 +57,11 @@ else {
   fwrite($fp, $msg);
 
   // We can check if an error has been returned while we are sending, but we also need to check once more after we are done sending in case there was a delay with error response.
-  $error1 = checkAppleErrorResponse($fp, $session['targetId');
+  $error1 = checkAppleErrorResponse($fp, $session['targetId']);
 
   // Workaround to check if there were any errors during the last seconds of sending.
   usleep(500000); //Pause for half a second. Note I tested this with up to a 5 minute pause, and the error message was still available to be retrieved
-  $error2 = checkAppleErrorResponse($fp, $session['targetId');
+  $error2 = checkAppleErrorResponse($fp, $session['targetId']);
 
   if ( empty($error1) && empty($error2))
     print("OK");

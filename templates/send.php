@@ -21,7 +21,7 @@ function generate_script($tokens) {
   while ( count($tokens) != 0 ) {
     $token = array_shift($tokens);
     $script .= " [" . $token['id'] . ", '" . $token['token'] . "']";
-    $script .= count($tokens) == 0 ? "];\r\n\n" : ",\r\n";
+    $script .= count($tokens) == 0 ? "\r\n];\r\n\n" : ",\r\n";
   }
 
 $script .= <<<EOF
