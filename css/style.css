@@ -33,7 +33,7 @@
   flex: 0.5;
 }
 
-#login .container .row .field .loginField {
+#login .container .row .field .loginField, #login .container .row .field .loginField option {
   text-align: right;
 }
 
@@ -107,27 +107,43 @@ div.mainui .title, div.mainui .productname, div.mainui .count, div.mainui .modes
   border: dashed 1px #000;
 }
 
-#tokenList .pageList {
-  font-size: 14px;
+#tokenList .error {
+  background-color: red;
+  color: #fff;
+  display: inline-block;
+  margin-top: 12px;
+  margin-bottom: 2px;
+  margin-left: auto;
+  margin-right: auto;
+  font-weight: bold;
+  font-size: 13px;
+  padding: 6px;
+  border: dotted 1px #eee;
+}
+
+#tokenList .controlPanel {
+  font-size: 13px;
+  margin: 2px;
+  margin-left: 8px;
   margin-bottom: 4px;
-  margin-top: 8px;
-  margin-left: 8px;
 }
 
-#tokenList .messagebox {
-  font-size: 14px;
-  margin-bottom: 8px;
-  margin-top: 4px;
-  margin-left: 8px;
+#tokenList .controlPanel tr.radio td, #tokenList .controlPanel tr.inputField td {
+  margin-bottom: 4px;
 }
 
-#tokenList .messageBox .messageField {
+#tokenList .controlPanel td.label {
+  margin-right: 4px;
+}
+
+#tokenList .controlPanel td.submitbtn {
   text-align: right;
 }
 
 #tokenList .tokenContainer {
   display: flex;
   flex-direction: column;
+  margin-top: 16px;
   margin-bottom: 4px;
 }
 
