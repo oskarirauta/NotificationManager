@@ -5,7 +5,7 @@ global $ROOT_DIR;
 require_once $ROOT_DIR . '/inc/generic.php';
 
 $session = [
-  'ssl' => /*is_ssl()*/true,
+  'ssl' => is_ssl(),
   'uuid' => '',
   'name' => '',
   'validated' => false,
