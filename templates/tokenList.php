@@ -83,7 +83,7 @@ function tokenList() {
   $ret .= "<tr class='inputField'><td class='label'>\r\n";
   $ret .= "Badge:\r\n";
   $ret .= "</td><td class='field'>\r\n";
-  $ret .= inputType('text', 'payloadBadge', '', [ 'placeholder' => 'badge number', 'class' => 'messageField', 'autocomplete' => 'off' ]);
+  $ret .= inputType('number', 'payloadBadge', '', [ 'placeholder' => 'badge number', 'class' => 'messageField', 'min' => '0', 'max' => '999', 'autocomplete' => 'off' ]);
   $ret .= "</td><td colspan='3'>&nbsp;</td></tr>";
   $ret .= "<tr class='inputField'><td class='label'>\r\n";
   $ret .= "Title:\r\n";
