@@ -19,7 +19,7 @@ function generate_page() {
   $page['title'] = 'Notification system';
 
   $page['body'] .= "<div class='mainui'>\r\n";
-  $page['body'] .= "<div class='title'>Welcome to notification messenger.</div>\r\n";
+  $page['body'] .= "<div class='title'>Welcome to notification messenger, " . $session['name'] . ".</div>\r\n";
   $page['body'] .= "<div class='productname'>Product: <b>" . $session['product'] . "</b>";
   $page['body'] .= "<small style='margin-left: 6px;'>" . ( $session['debugOnly'] ? "[<u>DEBUG</u>]" : "[<u>PRODUCTION</u>]" ) . "</small>";
   $page['body'] .= "</div>\r\n";
