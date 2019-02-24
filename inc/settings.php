@@ -1,15 +1,25 @@
 <?php
 
-$products = [ // list of appname's using this in lowercase
-  'hourtracker' => [
-    'store' => '$2y$10$l7ihWVt.WkFO1B5vFJb3UONGWAOv9ACT3vOjpxSsNiUWgcczbYqO.', // password is "password" - stored as password hash.
-    'cert' => 'password' // Certificate passwords must be in cleartext
+$products = [ // list of products. Generate store password hashes with password.php
+  'product1' => [
+    'store' => '$2y$10$kwA3SiAf92ATQEwYiQaCHOZHVEiW5ahiwhaeCznlaUlVijkeD2dUW',
+    'cert' => 'password' // Certificate passwords must be stored in clear-text.
+  ], [
+  'product2' => [
+    'store' => '$2y$10$hKxrS8vJh1o2sGIwNjZwtePQMvVGhgRqVsqmjz18awJ/NX5RyBhdW',
+    'cert' => 'password'
   ]
 ];
 
-$credentials = [ // userid => password hash (use password.php to generate)
-  'admin => '$2y$10$e98bnSc.p/bnxfMcNTj75.NtGqmYqszfUNJWSkaB7OaDloUBY40Hi',
-  'user => '$2y$10$i2Yp3Oqh5vRGmKLG6fjt3OfdjGn6/w7zpl1szsA5r0BdEOrMQzxs.'
+$credentials = [ // use password.php to generate password hashes.
+  'user1@email.com' => [
+    'name' => 'Fullname 1',
+    'password' => '$2y$10$hS2G0gTsXfAe6o44gEHZ1.l0ItVrfasT0dKLPSLk2TCIEOj1CfR92'
+  ],
+  'user2@email.com' => [
+    'name' => 'Fullname 2',
+    'password' => '$2y$10$ZDz4niKCI0/TZi.1118z7ug86hClEtfRBKqJGOQkoPJgdoZfqa5nK'
+  ]
 ];
 
 ?>

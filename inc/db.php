@@ -13,7 +13,7 @@ class MyDB extends SQLite3 {
     $db_path = $ROOT_DIR . '/tokens.db';
 
     $this -> open($db_path, SQLITE3_OPEN_CREATE | SQLITE3_OPEN_READWRITE);
-    $this -> busyTimeout(8500);
+    $this -> busyTimeout(12500);
 
     $sql = <<<EOF
 CREATE TABLE IF NOT EXISTS entries (
@@ -53,7 +53,7 @@ EOF;
     $this -> exec('COMMIT;');
   }
 
-  function create_session($product) {
+  function create_session($product, $name) {
 
     $uuid = newuuid();
     while ( true ) {

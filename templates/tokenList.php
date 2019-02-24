@@ -72,23 +72,28 @@ function tokenList() {
     $ret .= inputType('hidden', 'targetId', $session['targetId']) . "\r\n";
   $ret .= "<tr class='radio'>\r\n";
   $ret .= "<td class='label'><label for='sound'>Sound:</label></td>\r\n";
-  $ret .= "<td class='radiobtn' colspan='4'><input type='radio' name='sound' value='default'>&nbsp;Default</input>\r\n";
+  $ret .= "<td class='radiobtn' colspan='4'><input type='radio' name='payloadSound' value='default' checked='checked'>&nbsp;Default</input>\r\n";
   $ret .= "</tr><tr>\r\n";
-  $ret .= "<tr class='radio'><td class='label'>&nbsp;</td><td class='radiobtn' colspan='4'><input type='radio' name='sound' value=''>&nbsp;None</input>\r\n";
+  $ret .= "<tr class='radio'><td class='label'>&nbsp;</td><td class='radiobtn' colspan='4'><input type='radio' name='payloadSound' value=''>&nbsp;None</input>\r\n";
   $ret .= "</td></tr>\r\n";
-  $ret .= "<tr class='radio'><td class='label'>&nbsp;</td><td class='radiobtn'><input type='radio' name='sound' value='custom'>&nbsp;Custom</input>\r\n";
+  $ret .= "<tr class='radio'><td class='label'>&nbsp;</td><td class='radiobtn'><input type='radio' name='payloadSound' value='-'>&nbsp;Custom</input>\r\n";
   $ret .= "</td><td class='field' colspan='2'>\r\n";
-  $ret .= inputType('text', 'customSound', '', [ 'placeholder' => 'custom sound', 'class' => 'messageField', 'autocomplete' => 'off' ]);
+  $ret .= inputType('text', 'soundName', '', [ 'placeholder' => 'custom sound', 'class' => 'messageField', 'autocomplete' => 'off' ]);
   $ret .= "</td><td>&nbsp;</td></tr>\r\n";
   $ret .= "<tr class='inputField'><td class='label'>\r\n";
   $ret .= "Badge:\r\n";
   $ret .= "</td><td class='field'>\r\n";
-  $ret .= inputType('text', 'badge', '', [ 'placeholder' => 'badge number', 'class' => 'messageField', 'autocomplete' => 'off' ]);
+  $ret .= inputType('text', 'payloadBadge', '', [ 'placeholder' => 'badge number', 'class' => 'messageField', 'autocomplete' => 'off' ]);
   $ret .= "</td><td colspan='3'>&nbsp;</td></tr>";
+  $ret .= "<tr class='inputField'><td class='label'>\r\n";
+  $ret .= "Title:\r\n";
+  $ret .= "</td><td class='field'>\r\n";
+  $ret .= inputType('text', 'payloadTitle', '',  [ 'placeholder' => 'Notification title', 'class' => 'messageField', 'autocomplete' => 'off' ]) . "\r\n";
+  $ret .= "</td><td colspan='2'>&nbsp;</td></tr>\r\n";
   $ret .= "<tr class='inputField'><td class='label'>\r\n";
   $ret .= "Message:\r\n";
   $ret .= "</td><td class='field'>\r\n";
-  $ret .= inputType('text', 'payload', '', [ 'placeholder' => 'message', 'class' => 'messageField', 'autocomplete' => 'off', 'required' => true ]) . "\r\n";
+  $ret .= inputType('text', 'payloadMsg', '', [ 'placeholder' => 'message', 'class' => 'messageField', 'autocomplete' => 'off', 'required' => true ]) . "\r\n";
   $ret .= "</td><td>&nbsp;</td><td class='submitbtn'>\r\n";
 
   $tokens = [];
@@ -144,14 +149,7 @@ function tokenList() {
     $ret .= "</div>\r\n";
   }
 
-  $ret .= "</div>\r\n";
-  $ret .= "<div class='tokenlist'>\r\n";
-
-
-  $ret .= "</div>\r\n";
-
-  $ret .= "</div>\r\n";
-
+  $ret .= "</div></div>\r\n";
   return $ret;
 }
 

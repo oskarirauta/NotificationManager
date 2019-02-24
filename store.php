@@ -12,9 +12,6 @@ require_once $ROOT_DIR . '/inc/generic.php';
 require_once $ROOT_DIR . '/inc/db.php';
 require_once $ROOT_DIR . '/inc/vars.php';
 
-// Fake ssl for debugging purposes
-//$session['ssl'] = true;
-
 if ( !$session['ssl']) {
   $page = notSSL();
   print(pageData());

@@ -4,8 +4,6 @@ global $ROOT_DIR;
 
 require_once $ROOT_DIR . '/inc/generic.php';
 
-$first_run = true;
-
 $session = [
   'ssl' => /*is_ssl()*/true,
   'uuid' => '',
@@ -18,16 +16,16 @@ $session = [
   'debugOnly' => false,
   'targetId' => '',
   'deviceToken' => '',
-  'payloadtitle' => '',
-  'payload' => '',
-  'badge' => '',
-  'sound' => '',
-  'notifyurl' => '',
   'version' => '',
   'build' => '',
   'password' => '',
   'deleteToken' => false,
-  'invalid' => 0
+  'invalid' => 0,
+  'payloadTitle' => '',
+  'payloadMsg' => '',
+  'payloadBadge' => '',
+  'payloadSound' => '',
+  'notifyURL' => ''
 ];
 
 $page = [

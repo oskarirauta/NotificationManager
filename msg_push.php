@@ -13,7 +13,11 @@ require $ROOT_DIR . '/inc/construct.php';
  *
  */
 
-if ( empty($session['targetId']) || empty($session['deviceToken']) || empty($session['payload']) || empty($session['product'])) {
+if ( empty($session['targetId']) || empty($session['deviceToken']) || empty($session['payloadMsg']) || empty($session['product'])) {
+  print("target ID: " . $session['targetId'] . "\r\n");
+  print("device Token: " . $session['deviceToken'] . "\r\n");
+  print("payloadMsg: " . $session['payloadMsg'] . "\r\n");
+  print("product: " . $session['product'] . "\r\n");
   print("Error code -1: Incorrect parameters\r\n");
   return;
 }
@@ -26,14 +30,14 @@ $server = 'ssl://gateway.' . ( $session['debugOnly'] ? 'sandbox.' : '' ) . 'push
 $body['aps'] = array(
   'alert' => array(
     'title' => '',
-    'body' => $session['payload']),
+    'body' => $session['payloadMsg']),
   'sound' => 'default'
 );
 
-if ( !empty($session['payloadtitle'])) $body['aps']['alert']['title'] = $session['payloadtitle'];
-if ( !empty($session['notifyurl'])) $body['aps']['notifyurl'] = $session['notifyurl'];
-if ( !empty($session['badge'])) $body['aps']['badge'] = $session['badge'];
-if ( !empty($session['sound'])) $body['aps']['sound'] = $session['sound'];
+if ( !empty($session['payloadTitle'])) $body['aps']['alert']['title'] = $session['payloadTitle'];
+if ( !empty($session['notifyURL'])) $body['aps']['notifyurl'] = $session['notifyURL'];
+if ( !empty($session['payloadBadge'])) $body['aps']['badge'] = $session['payloadBadge'];
+if ( !empty($session['payloadSound'])) $body['aps']['sound'] = $session['payloadSound'];
 
 // Setup stream (connect to Apple Push Server)
 $ctx = stream_context_create();

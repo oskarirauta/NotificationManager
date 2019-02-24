@@ -11,9 +11,6 @@ require_once $ROOT_DIR . '/inc/generic.php';
 require_once $ROOT_DIR . '/inc/db.php';
 require_once $ROOT_DIR . '/inc/vars.php';
 
-// Fake ssl for debugging purposes
-// $session['ssl'] = true;
-
 if ( !$session['ssl']) {
   $page = notSSL();
   print(pageData());
@@ -43,11 +40,12 @@ if ( !empty($session['uuid']) && !$session['validated'] ) {
   $session['pageIndex'] = 0;
   $session['targetId'] = '';
   $session['debugOnly'] = false;
-  $session['payload'] = '';
   $session['deviceToken'] = '';
-  $session['badge'] = '';
-  $session['sound'] = '';
-  $session['notifyurl'] = '';
+  $session['payloadTitle'] = '';
+  $session['payloadMsg'] = '';
+  $session['payloadBadge'] = '';
+  $session['payloadSound'] = '';
+  $session['notifyURL'] = '';
   $session['error'] = 'Invalid session. Timed-out?';
 }
 
@@ -58,34 +56,32 @@ $session['pageIndex'] = getParam('pageIndex') or '';
 $session['debugOnly'] = getParam('debugOnly') == '1' ? true : false;
 $session['targetId'] = getParam('targetId') or '';
 $session['deviceToken'] = getParam('deviceToken') or '';
-$session['payload'] = getParam('payload') or '';
-$session['badge'] = getParam('badge') or '';
-$session['sound'] = getParam('sound') or '';
-$session['notifyurl'] = getParam('notifyurl') or '';
+$session['payloadTitle'] = getParam('payloadTitle') or '';
+$session['payloadMsg'] = getParam('payloadMsg') or '';
+$session['payloadBadge'] = getParam('payloadBadge') or '';
+$session['payloadSound'] = getParam('payloadSound') or '';
+$session['notifyURL'] = getParam('notifyURL') or '';
 
-if /*( empty($session['uuid']) && empty($session['error']))*/ (true) {
+if ( $session['payloadSound'] == '-' && !empty(getParam('soundName'))) {
+  $session['payloadSound'] = getParam('soundName') or 'default';
+}
+
+if ( empty($session['uuid']) && empty($session['error'])) {
   $userid = getParam('userid') == null ? '' : strtolower(getParam('userid'));
   $password = getParam('passwd') or '';
   $product = getParam('product') == null ? '' : strtolower(getParam('product'));
   $users = array_map('strtolower', array_keys($credentials));
 
-/*
-//Entrypoint for debugging issues after login.
-  $userid = 'myuser';
-  $password = 'mypassword';
-  $product = 'myproduct';
-*/
-
-  if ( in_array($userid, $users) && password_verify($password, $credentials[$userid]) && !empty($product) && in_array($product, array_keys($products))) {
-    $session['uuid'] = $db -> create_session($product);
-    $session['name'] = $userid;
+  if ( in_array($userid, $users) && password_verify($password, $credentials[$userid]['password']) && !empty($product) && in_array($product, array_keys($products))) {
+    $session['uuid'] = $db -> create_session($product, $credentials[$userid]['name']);
+    $session['name'] = $credentials[$userid]['name'] or $userid;
     $session['product'] = $product;
     $session['validated'] = true;
   } else if ( !in_array($userid, $users)) {
     $session['error'] = 'Invalid user id.';
   } else if ( empty($product) || !in_array($product, array_keys($products))) {
     $session['error'] = 'Invalid product code.';
-  } else if ( !password_verify( $password, $credentials[$userid] )) {
+  } else if ( !password_verify( $password, $credentials[$userid]['password'] )) {
     $session['error'] = 'Invalid password.';
   }
   if ( !empty($session['error'])) {

@@ -52,9 +52,6 @@ function generate_page() {
 
   $page['body'] .= "</select>\r\n";
   $page['body'] .= "</div>\r\n";
-/*
-  $page['body'] .= "<div class='field'>" . inputType('text', 'product', '', [ 'placeholder' => 'product code', 'class' => 'loginField', 'required' => true ]) . "</div>\r\n";
-*/
   $page['body'] .= "<div class='req'>&nbsp;*</div>\r\n";
   $page['body'] .= "</div>\r\n";
 
@@ -65,12 +62,8 @@ function generate_page() {
   $page['body'] .= "</div>\r\n";
   $page['body'] .= "</div>\r\n";
 
-  $page['body'] .= "</div>\r\n";
-  $page['body'] .= "</div>\r\n";
-
-  // $page['body'] .= inputType('hidden', 'uuid', $session['uuid'], [ 'placeholder' => 'uuid', 'required' => '1']);
-  
-  $page['body'] .= "</FORM>";
+  $page['body'] .= "</div></div>\r\n";
+  $page['body'] .= "</form>";
 
 }
 

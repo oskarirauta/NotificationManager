@@ -13,32 +13,38 @@ NotificationManager uses Sqlite database.
 
 ## Requirements
 PHP 7.x or newer.
+SSL/https on server.
 
 ### store.php
 This is used by iOS application. Application contacts store.php with parameters providing all necessary information and then store's that information to database.
+Required parameters (get, post and request supported for delivery):
+ - product = identical to product name in settings.php
+ - debugOnly (optional ) = 1 for debug tokens. Empty or missing for production tokens.
+ - uuid = device's identifier for developer's
+ - deviceToken = notification registration token
+ - version = app version (string)
+ - build = build number (integer)
+ - password = product's store password (stored as hash in settings.php)
+
+Example:
+https://myserver.com/NotificationManager/store.php?product=myproduct&debugOnly=1&uuid=1234&deviceToken=4321&version=1.0&build=100&password=password
 
 ### manager.php
-Manager is a application that allows one to view registered tokens and other information. It can be also used to post a notification message to users. You can choose between debug or production environment.
+Manager is a application that allows one to view registered tokens and other information. It can be also used to post a notification message to users. You can switch between debug or production environment.
 A notification can also be sent to single device, if you can identify it from the list, by selecting id for that device.
 
 ### Setup
-Always when there says product, use it in lower case letters to avoid issues.
+To avoid issues, store userid's and products in lowercase with following character set: `abcdefghijklmnopqrstuvwxyz@,.1234567890`
+Steps to take system into use:
 
- - Generate password hash with `password.php` from shell:
+ - Create users in settings.php, store every user's password as hash which can be generated with password.php
    ```# php password.php```
-   Then copy generated hash to clipboard.
- - Edit `inc/settings.php` file:
-   - set credentials => userid to userid of your desire.
-   - paste password hash from clipboard to credentials => password
-   - add product titles to products list.
-   - add product titles to cert_password list.
-   - add certificate passwords to cert_password list ( development and production environments must have same password )
- - store your first token (can be fake):
-   - by using `store.php` from shell, but first make necessary changes in 2 places in `store.php`. They are commented out, first one is where you force SSL as detected and second part is near end of file, manually enter apropriate fake data for fake token entry.
- - Add certificates to `certs/`:
-   For each product, 2 certificates are required with password matching with entry in `inc/settings.php`. Name them like this:
-   - product.pem
-   - product_debug.pem
+   I recommend copy & paste of hashes.
+ - Create appropriate products in settings.php's product list variable. Set store passwords as hashes just like you did for user's passwords. Certificate passwords must be stored in clear text.
+ - Add .pem certificates to certs/ for all products. This means 2 certificates/product.
+   You should name them like this:
+    - production: product.pem
+    - debug environment: product_debug.pem
    
 ### License
 NotificationMaster's apns code is partially copied from another project, which might be under influence of a licenses of a kind. NotificationMaster uses nanoajax js library. Rest of project is work of Oskari Rauta and code is release as-is in the github for everyone. In case that you improve NotificationMaster, do not hesitate to PR. NotificationMaster is available free for distribution, using or modification. Would be glad to get some credits though ;)

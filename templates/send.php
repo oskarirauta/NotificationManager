@@ -15,7 +15,13 @@ function generate_script($tokens) {
   $script .= "var reqId = " . time() . ";\r\n";
   $script .= "var debugMode = " . ( $session['debugOnly'] ? "1" : "0" ) . ";\r\n";
   $script .= "var tokenCount = " . count($tokens) . ";\r\n";
-  $script .= "var msg = '" . $session['payload'] . "';\r\n";
+  $script .= "var product = '" . $session['product'] . "';\r\n";
+  $script .= "var payloadTitle = '" . $session['payloadTitle'] . "';\r\n";
+  $script .= "var payloadMsg = '" . $session['payloadMsg'] . "';\r\n";
+  $script .= "var payloadSound = '" . $session['payloadSound'] . "';\r\n";
+  $script .= "var payloadBadge = '" . $session['payloadBadge'] . "';\r\n";
+  $script .= "var notifyURL = '" . $session['notifyURL'] . "';\r\n";
+  
   $script .= "var tokenList = [\r\n";
 
   while ( count($tokens) != 0 ) {
@@ -45,25 +51,13 @@ function endSending() {
   doneBtnEl.style.display = "block";
 }
 
-/*
-async function delay(delayInms) {
-  return new Promise(resolve  => {
-    setTimeout(() => {
-      resolve(2);
-    }, delayInms);
-  });
-}
-
-async function send() {
-*/
-
 function send() {
 
   if ( tokenList.length > 0 ) {
     var thisToken = tokenList.shift();
     //let delayres = await delay(100);
     
-    nanoajax.ajax({url:'./msg_push.php?uuid=' + sessionId + '&debugOnly=' + debugMode + '&targetId=' + thisToken['0'] + '&debugMode=' + debugMode + '&deviceToken=' + thisToken[1] + '&payload=' + msg}, function (code, responseText) {
+    nanoajax.ajax({url:'./msg_push.php?uuid=' + sessionId + '&product=' + product + '&debugOnly=' + debugMode + '&targetId=' + thisToken['0'] + '&debugMode=' + debugMode + '&deviceToken=' + thisToken[1] + '&payloadTitle=' + payloadTitle + '&payloadMsg=' + payloadMsg + '&payloadBadge=' + payloadBadge + '&payloadSound=' + payloadSound + '&notifyURL=' + notifyURL}, function (code, responseText) {
 
       progressEl.value = progressEl.value + 1;
       percentageEl.innerHTML = Math.floor(( progressEl.value / progressEl.max ) * 100 ) + "%";
@@ -124,12 +118,20 @@ function generate_page() {
   $page['body'] .= "<small style='margin-left: 6px;'>" . ( $session['debugOnly'] ? "[<u>DEBUG</u>]" : "[<u>PRODUCTION</u>]" ) . "</small>";
   $page['body'] .= "</div>\r\n";
   $page['body'] .= "<div class='count'>Sending to " . ( empty($session['targetId']) ? strval($idCount) : "1" ) . " devices.</div>\r\n";
-  $page['body'] .= "<div class='msgpreview'>Message: " . $session['payload'] . "</div>\r\n";
+  $page['body'] .= "<div class='msgpreview'>Message: " . ( !empty($session['payloadTitle']) ? ( "<b>[" . $session['payloadTitle'] . "]</b>&nbsp;" ) : '' ) . $session['payloadMsg'] . "\r\n";
 
-  $page['body'] .= "</div>";
+  if ( !empty($session['payloadBadge'])) {
+    $page['body'] .= "<br/>\r\n";
+    $page['body'] .= "Badge: " . $session['payloadBadge'] . "\r\n";
+  }
 
+  if ( !empty($session['payloadSound'])) {
+    $page['body'] .= "<br/>\r\n";
+    $page['body'] .= "Sound: " . $session['payloadSound'] . "\r\n";
+  }
+
+  $page['body'] .= "</div></div>\r\n";
   $page['body'] .= progressView();
-
 }
 
 ?>
