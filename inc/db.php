@@ -34,6 +34,7 @@ CREATE TABLE IF NOT EXISTS sessions (
   id integer PRIMARY KEY AUTOINCREMENT NOT NULL,
   timestamp REAL,
   uuid TEXT,
+  name TEXT,
   product TEXT
 );
 EOF;
@@ -65,7 +66,7 @@ EOF;
       }
     }
 
-    $this -> exec("INSERT INTO sessions (timestamp, uuid, product) VALUES (julianday('now'), '" . $uuid . "', '" . $product . "');");
+    $this -> exec("INSERT INTO sessions (timestamp, uuid, name, product) VALUES (julianday('now'), '" . $uuid . "', '" . $name . "', '" . $product . "');");
     return $uuid;
   }
 
@@ -80,6 +81,11 @@ EOF;
 
   function logout($uuid) {
     $this -> exec("DELETE FROM sessions WHERE uuid = '" . $uuid . "';");
+  }
+
+  function validate_name($uuid) {
+    $name = $this -> querySingle("SELECT name from sessions WHERE uuid = '" . $uuid . "';");
+    return $name;
   }
 
   function validate_product($uuid) {
