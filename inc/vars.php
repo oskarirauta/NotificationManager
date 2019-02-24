@@ -7,7 +7,7 @@ require_once $ROOT_DIR . '/inc/generic.php';
 $first_run = true;
 
 $session = [
-  'ssl' => /*is_ssl()*/true,
+  'ssl' => is_ssl(),
   'uuid' => '',
   'name' => '',
   'validated' => false,
