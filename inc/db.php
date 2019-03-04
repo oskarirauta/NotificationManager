@@ -49,6 +49,8 @@ EOF;
 
     $this -> exec("DELETE FROM entries WHERE timestamp < julianday('now', '-4 months') or invalid = 1;");
     $this -> exec("DELETE FROM sessions WHERE timestamp < julianday('now', '-18 minutes');");
+    $this -> exec("DELETE FROM entries WHERE id NOT IN (SELECT MAX(id) FROM entries GROUP BY product, debug, uuid, token, invalid);");
+    $this -> exec("DELETE FROM sessions WHERE id NOT IN (SELECT MAX(id) FROM sessions GROUP BY uuid, name, product);");
 
     $this -> exec('COMMIT;');
   }
