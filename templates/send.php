@@ -105,7 +105,7 @@ function generate_page() {
     return;
   }
 
-  $tokens = empty($session['targetId']) ? $db -> getAllTokens($session['product'], $session['debugOnly'] ? 1 : 0) : [ $db -> getToken($session['targetId']) ];
+  $tokens = empty($session['targetId']) ? $db -> getAllTokens($session['product'], $session['debugOnly'] ? 1 : 0) : $db -> getToken($session['targetId']);
 
   $idCount = $db -> amountOf($session['product'], $session['debugOnly'] ? 1 : 0);
   $page['title'] = 'Notification system - Sending';
